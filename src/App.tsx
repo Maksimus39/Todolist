@@ -48,6 +48,11 @@ function App() {
         const newTasks = [newTask, ...tasks]
         setTasks(newTasks)
     }
+    // функция для изменения статуса галочки
+    const changeTaskStatus = (taskID: string, taskStatus: boolean) => {
+       const newState = tasks.map(t=>(t.id===taskID?{...t,isDone:taskStatus}:t))
+        setTasks(newState)
+    }
     return (
         <div className="App">
             <Todolist
@@ -56,6 +61,8 @@ function App() {
                 removeTask={removeTask}
                 changeFilter={changeFilter}
                 addTask={addTask}
+                changeTaskStatus={changeTaskStatus}
+                filter={filter}
             />
         </div>
     );
