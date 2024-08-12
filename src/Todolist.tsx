@@ -8,14 +8,16 @@ export type TasksType = {
     isDone: boolean
 }
 type TodolistProps = {
+    todolistId: string
     title: string,
     tasks: TasksType[]
     filter: string
 
-    removeTask: (taskID: string) => void
-    changeFilter: (filter: FilterValuesType) => void
-    addTask: (title: string) => void
-    changeTaskStatus: (taskID: string, taskStatus: boolean) => void
+    removeTask: (taskID: string, todolistId: string) => void
+    changeFilter: (filter: FilterValuesType, todolistId: string) => void
+    addTask: (title: string, todolistId: string) => void
+    changeTaskStatus: (todolistId: string, taskID: string, taskStatus: boolean) => void
+    removeTodolist: (todolistId: string) => void
 }
 
 export const Todolist = (props: TodolistProps) => {
@@ -26,7 +28,7 @@ export const Todolist = (props: TodolistProps) => {
     // функция добавления таски
     const addTaskHandler = () => {
         if (taskTitle.trim() !== '') {
-            props.addTask(taskTitle.trim())
+            props.addTask(taskTitle.trim(), props.todolistId)
             setTaskTitle('')
         } else {
             setError('Title is required')
@@ -46,12 +48,20 @@ export const Todolist = (props: TodolistProps) => {
     }
     // функция для кнопок фильтрации
     const changeFilterTasksHandler = (filter: FilterValuesType) => {
-        props.changeFilter(filter)
+        props.changeFilter(filter, props.todolistId)
     }
-
+    // функция удаления тудулиста
+    const removeTodolistHandler = () => {
+        props.removeTodolist(props.todolistId)
+    }
     return (
         <div>
-            <h3>{props.title}</h3>
+
+            <div className={'todolist-title-container'}>
+                <h3>{props.title}</h3>
+                <Button title={'X'} onClick={removeTodolistHandler}/>
+            </div>
+
             <div>
                 <input
                     className={error ? 'error' : ''}
@@ -71,12 +81,12 @@ export const Todolist = (props: TodolistProps) => {
                     {props.tasks.map(task => {
                         // функция удаления таски
                         const removeTaskHandler = () => {
-                            props.removeTask(task.id)
+                            props.removeTask(task.id, props.todolistId)
                         }
 
                         const changeTaskStatusHandler = (event: ChangeEvent<HTMLInputElement>) => {
                             const newStatusValue = event.currentTarget.checked; // Используем checked вместо value
-                            props.changeTaskStatus(task.id, newStatusValue);
+                            props.changeTaskStatus(props.todolistId, task.id, newStatusValue);
                         }
                         return (
                             <li key={task.id} className={task.isDone ? 'is-done' : ''}>
