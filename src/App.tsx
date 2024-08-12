@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import {TasksType, Todolist} from "./Todolist";
 import {v1} from "uuid";
+import {AddItemForm} from "./AddItemForm";
 
 export type TodolistType = {
     id: string
@@ -14,7 +15,6 @@ export type TasksStateType = {
 }
 
 function App() {
-
     // массив тудулистов
     let todolistID1 = v1()
     let todolistID2 = v1()
@@ -74,8 +74,32 @@ function App() {
         delete tasks[todolistId]
         setTasks({...tasks})
     }
+    // универсальная форма добавления тудулиста
+    const addTodolist = (title: string) => {
+        const todolistId1 = v1()
+        const newTodolist: TodolistType = {
+            id: todolistId1,
+            title: title,
+            filter: 'All'
+        }
+        setTodolist([newTodolist, ...todolist])
+        setTasks({...tasks, [todolistId1]: []})
+    }
+    // функция изменения названия таски
+    const updateTask = (todolistId: string, taskID: string, title: string) => {
+        const newTitleTasks = {
+            ...tasks,
+            [todolistId]: tasks[todolistId].map(t => t.id === taskID ? {...t, title: title} : t)
+        }
+        setTasks(newTitleTasks)
+    }
+    // функция переименования заголовка тудулиста
+    const updateTodolist = (todolistId: string, title: string) => {
+        setTodolist(todolist.map(t => t.id === todolistId ? {...t, title: title} : t))
+    }
     return (
         <div className="App">
+            <AddItemForm addItem={addTodolist}/>
             {todolist.map(tl => {
                 const allTodolistTasks = tasks[tl.id]
                 let tasksForTodolist = allTodolistTasks
@@ -99,6 +123,8 @@ function App() {
                         changeTaskStatus={changeTaskStatus}
                         filter={tl.filter}
                         removeTodolist={removeTodolist}
+                        updateTask={updateTask}
+                        updateTodolist={updateTodolist}
                     />
                 )
             })}
