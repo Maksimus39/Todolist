@@ -1,8 +1,13 @@
-import {Button} from "./Button";
 import {FilterValuesType} from "./App";
 import React, {ChangeEvent} from "react";
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
+
+import IconButton from '@mui/material/IconButton'
+import DeleteIcon from '@mui/icons-material/Delete'
+import { CustomButton} from "./Button";
+
+
 
 export type TasksType = {
     id: string
@@ -48,8 +53,10 @@ export const Todolist = (props: TodolistProps) => {
                 <h3>
                     <EditableSpan value={props.title} onChange={updateTodolistHandler}/>
                 </h3>
-
-                <Button title={'X'} onClick={removeTodolistHandler}/>
+                <IconButton onClick={removeTodolistHandler}>
+                    <DeleteIcon/>
+                </IconButton>
+                {/*<Button title={'X'} onClick={removeTodolistHandler}/>*/}
             </div>
             <AddItemForm addItem={addTaskCallback}/>
 
@@ -78,7 +85,9 @@ export const Todolist = (props: TodolistProps) => {
                                     onChange={changeTaskStatusHandler}
                                 />
                                 <EditableSpan value={task.title} onChange={changeTaskTitleHandler}/>
-                                <Button title={'X'} onClick={removeTaskHandler}/>
+                                <IconButton onClick={removeTaskHandler}>
+                                    <DeleteIcon/>
+                                </IconButton>
                             </li>
                         )
                     })}
@@ -86,24 +95,24 @@ export const Todolist = (props: TodolistProps) => {
                 }
             </div>
             <div>
-                <Button
-                    className={props.filter === 'All' ? 'active-filter' : ''}
+                <CustomButton
+                    variant={props.filter === 'All' ? 'contained' : 'text'}
+                    color={'inherit'}
                     title={'All'}
-                    onClick={() => {
-                        changeFilterTasksHandler('All')
-                    }}/>
-                <Button
-                    className={props.filter === 'Active' ? 'active-filter' : ''}
+                    onClick={() => changeFilterTasksHandler('All')}
+                />
+                <CustomButton
+                    variant={props.filter === 'Active' ? 'contained' : 'text'}
+                    color={'primary'}
                     title={'Active'}
-                    onClick={() => {
-                        changeFilterTasksHandler('Active')
-                    }}/>
-                <Button
-                    className={props.filter === 'Completed' ? 'active-filter' : ''}
+                    onClick={() => changeFilterTasksHandler('Active')}
+                />
+                <CustomButton
+                    variant={props.filter === 'Completed' ? 'contained' : 'text'}
+                    color={'secondary'}
                     title={'Completed'}
-                    onClick={() => {
-                        changeFilterTasksHandler('Completed')
-                    }}/>
+                    onClick={() => changeFilterTasksHandler('Completed')}
+                />
             </div>
         </div>
     )
