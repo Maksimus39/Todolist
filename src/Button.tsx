@@ -8,7 +8,7 @@ type ButtonProps = {
     color: 'inherit' | 'primary' | 'secondary';
 }
 
-export const CustomButton = (props: ButtonProps) => {
+export const Buttonn = (props: ButtonProps) => {
     return (
         <Button
             variant={props.variant}
