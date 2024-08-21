@@ -98,19 +98,19 @@ export const Todolist = (props: TodolistProps) => {
                     variant={props.filter === 'All' ? 'contained' : 'text'}
                     color={'inherit'}
                     title={'All'}
-                    onClick={() => changeFilterTasksHandler('All')}
+                    onClick={() => changeFilterTasksHandler('all')}
                 />
                 <Buttonn
                     variant={props.filter === 'Active' ? 'contained' : 'text'}
                     color={'primary'}
                     title={'Active'}
-                    onClick={() => changeFilterTasksHandler('Active')}
+                    onClick={() => changeFilterTasksHandler('active')}
                 />
                 <Buttonn
                     variant={props.filter === 'Completed' ? 'contained' : 'text'}
                     color={'secondary'}
                     title={'Completed'}
-                    onClick={() => changeFilterTasksHandler('Completed')}
+                    onClick={() => changeFilterTasksHandler('completed')}
                 />
             </Box>
         </div>
