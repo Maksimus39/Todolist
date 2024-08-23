@@ -7,7 +7,13 @@ import {AppBar, Container, createTheme, CssBaseline, Grid, Paper, Switch, ThemeP
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from '@mui/icons-material/Menu';
 import {MenuButton} from "./MenuButton";
-import {changeTodolistFilterAC, todolistsReducer} from "./model/todolists-reducer";
+import {
+    addTodolistAC,
+    changeTodolistFilterAC,
+    changeTodolistTitleAC,
+    removeTodolistAC,
+    todolistsReducer
+} from "./model/todolists-reducer";
 
 export type TodolistType = {
     id: string
@@ -30,7 +36,7 @@ function App() {
     //     {id: todolistID1, title: 'What to learn', filter: 'all'},
     //     {id: todolistID2, title: 'What to buy', filter: 'all'},
     // ])
-    let [todolist, dispatchTodolist] = useReducer(todolistsReducer,[
+    let [todolist, dispatchTodolist] = useReducer(todolistsReducer, [
         {id: todolistID1, title: 'What to learn', filter: 'all'},
         {id: todolistID2, title: 'What to buy', filter: 'all'},
     ])
@@ -86,6 +92,8 @@ function App() {
         // setTodolist(newTodolistID)
         // delete tasks[todolistId]
         // setTasks({...tasks})
+        const action = removeTodolistAC(todolistId)
+        dispatchTodolist(action)
     }
     // универсальная форма добавления тудулиста
     const addTodolist = (title: string) => {
@@ -97,6 +105,8 @@ function App() {
         // }
         // setTodolist([newTodolist, ...todolist])
         // setTasks({...tasks, [todolistId1]: []})
+        const action = addTodolistAC(title)
+        dispatchTodolist(action)
     }
     // функция изменения названия таски
     const updateTask = (todolistId: string, taskID: string, title: string) => {
@@ -109,6 +119,8 @@ function App() {
     // функция переименования заголовка тудулиста
     const updateTodolist = (todolistId: string, title: string) => {
         // setTodolist(todolist.map(t => t.id === todolistId ? {...t, title: title} : t))
+        const action = changeTodolistTitleAC(todolistId, title)
+        dispatchTodolist(action)
     }
 
 
@@ -127,7 +139,7 @@ function App() {
     return (
         <div className="App">
             <ThemeProvider theme={theme}>
-                <CssBaseline />
+                <CssBaseline/>
 
                 <AppBar position="static" sx={{mb: '30px'}}>
                     <Toolbar sx={{display: 'flex', justifyContent: 'space-between'}}>
@@ -138,7 +150,7 @@ function App() {
                             <MenuButton>Login</MenuButton>
                             <MenuButton>Logout</MenuButton>
                             <MenuButton background={theme.palette.primary.dark}>Faq</MenuButton>
-                            <Switch color={'default'} onChange={changeModeHandler} />
+                            <Switch color={'default'} onChange={changeModeHandler}/>
                         </div>
                     </Toolbar>
                 </AppBar>
