@@ -63,7 +63,7 @@ export const Todolist = (props: TodolistProps) => {
                 {props.tasks?.length === 0 ? (
                     <p>Тасок нет</p>
                 ) : <List>
-                    {props.tasks.map(task => {
+                    {props.tasks?.map(task => {
                         // функция удаления таски
                         const removeTaskHandler = () => {
                             props.removeTask(task.id, props.todolistId)
