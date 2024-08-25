@@ -32,10 +32,6 @@ function App() {
     let todolistID1 = v1()
     let todolistID2 = v1()
 
-    // let [todolist, setTodolist] = useState<TodolistType[]>([
-    //     {id: todolistID1, title: 'What to learn', filter: 'all'},
-    //     {id: todolistID2, title: 'What to buy', filter: 'all'},
-    // ])
     let [todolist, dispatchTodolist] = useReducer(todolistsReducer, [
         {id: todolistID1, title: 'What to learn', filter: 'all'},
         {id: todolistID2, title: 'What to buy', filter: 'all'},
@@ -43,13 +39,14 @@ function App() {
 
     const [tasks, setTasks] = useState<TasksStateType>({
         [todolistID1]: [
-            {id: v1(), title: 'HTML&CSS', isDone: true},
-            {id: v1(), title: 'JS', isDone: true},
-            {id: v1(), title: 'ReactJS', isDone: false},
+            {id: '1', title: 'CSS', isDone: false},
+            {id: '2', title: 'JS', isDone: true},
+            {id: '3', title: 'React', isDone: false}
         ],
         [todolistID2]: [
-            {id: v1(), title: 'Rest API', isDone: true},
-            {id: v1(), title: 'GraphQL', isDone: false},
+            {id: '1', title: 'bread', isDone: false},
+            {id: '2', title: 'milk', isDone: true},
+            {id: '3', title: 'tea', isDone: false}
         ]
     })
 
@@ -60,12 +57,8 @@ function App() {
         }
         setTasks(newTodolistTasks)
     }
-    // функция фильтрации тасок
+    // функция фильтрации тудулистов
     const changeFilter = (filter: FilterValuesType, todolistId: string) => {
-        // const newTodolist = todolist.map(tl => {
-        //     return tl.id === todolistId ? {...tl, filter} : tl
-        // })
-        // setTodolist(newTodolist)
         const action = changeTodolistFilterAC(filter, todolistId)
         dispatchTodolist(action)
     }
@@ -88,37 +81,24 @@ function App() {
     }
     // функция удаления тудулиста
     const removeTodolist = (todolistId: string) => {
-        // const newTodolistID = todolist.filter(t => t.id !== todolistId)
-        // setTodolist(newTodolistID)
-        // delete tasks[todolistId]
-        // setTasks({...tasks})
         const action = removeTodolistAC(todolistId)
         dispatchTodolist(action)
     }
     // универсальная форма добавления тудулиста
     const addTodolist = (title: string) => {
-        // const todolistId1 = v1()
-        // const newTodolist: TodolistType = {
-        //     id: todolistId1,
-        //     title: title,
-        //     filter: 'all'
-        // }
-        // setTodolist([newTodolist, ...todolist])
-        // setTasks({...tasks, [todolistId1]: []})
         const action = addTodolistAC(title)
         dispatchTodolist(action)
     }
     // функция изменения названия таски
     const updateTask = (todolistId: string, taskID: string, title: string) => {
-        const newTitleTasks = {
+        const newTodolistTasks = {
             ...tasks,
-            [todolistId]: tasks[todolistId].map(t => t.id === taskID ? {...t, title: title} : t)
+            [todolistId]: tasks[todolistId].map(t => (t.id === taskID ? { ...t, title } : t)),
         }
-        setTasks(newTitleTasks)
+        setTasks(newTodolistTasks)
     }
     // функция переименования заголовка тудулиста
     const updateTodolist = (todolistId: string, title: string) => {
-        // setTodolist(todolist.map(t => t.id === todolistId ? {...t, title: title} : t))
         const action = changeTodolistTitleAC(todolistId, title)
         dispatchTodolist(action)
     }
