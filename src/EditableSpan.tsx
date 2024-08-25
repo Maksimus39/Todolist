@@ -6,7 +6,7 @@ type EditableSpanProps = {
 }
 export const EditableSpan = ({value, onChange}: EditableSpanProps) => {
     const [editMode, setEditMode] = React.useState<boolean>(false)
-    const [title, setTitle] = React.useState<string>('')
+    const [title, setTitle] = React.useState<string>(value)
 
     const activateEditModeHandler = () => {
         setEditMode(true)
