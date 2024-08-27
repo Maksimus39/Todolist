@@ -14,6 +14,7 @@ import {
     removeTodolistAC,
     todolistsReducer
 } from "./model/todolists-reducer";
+import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTasksAC, tasksReducer} from "./model/tasks-reducer";
 
 export type TodolistType = {
     id: string
@@ -37,7 +38,7 @@ function App() {
         {id: todolistID2, title: 'What to buy', filter: 'all'},
     ])
 
-    const [tasks, setTasks] = useState<TasksStateType>({
+    const [tasks, dispatchToTasks] = useReducer(tasksReducer, {
         [todolistID1]: [
             {id: '1', title: 'CSS', isDone: false},
             {id: '2', title: 'JS', isDone: true},
@@ -52,10 +53,8 @@ function App() {
 
     // функция удаления таски
     const removeTask = (taskID: string, todolistId: string) => {
-        const newTodolistTasks = {
-            ...tasks, [todolistId]: tasks[todolistId].filter(t => t.id !== taskID)
-        }
-        setTasks(newTodolistTasks)
+        const action = removeTasksAC(taskID, todolistId)
+        dispatchToTasks(action)
     }
     // функция фильтрации тудулистов
     const changeFilter = (filter: FilterValuesType, todolistId: string) => {
@@ -64,20 +63,13 @@ function App() {
     }
     // функция добавления тасок
     const addTask = (title: string, todolistId: string) => {
-        const newTask = {
-            id: v1(),
-            title: title,
-            isDone: false,
-        }
-        const newTodolistTasks = {...tasks, [todolistId]: [newTask, ...tasks[todolistId]]}
-        setTasks(newTodolistTasks)
+        const action = addTaskAC(title, todolistId)
+        dispatchToTasks(action)
     }
     // функция для изменения статуса галочки
     const changeTaskStatus = (todolistId: string, taskID: string, taskStatus: boolean) => {
-        const newTodolistTasks = {
-            ...tasks, [todolistId]: tasks[todolistId].map(t => t.id === taskID ? {...t, isDone: taskStatus} : t)
-        }
-        setTasks(newTodolistTasks)
+        const action = changeTaskStatusAC(todolistId, taskID, taskStatus)
+        dispatchToTasks(action)
     }
     // функция удаления тудулиста
     const removeTodolist = (todolistId: string) => {
@@ -86,16 +78,15 @@ function App() {
     }
     // универсальная форма добавления тудулиста
     const addTodolist = (title: string) => {
-        const action = addTodolistAC(title)
-        dispatchTodolist(action)
+        const todolistAction = addTodolistAC(title)
+        dispatchTodolist(todolistAction)
+        dispatchToTasks(todolistAction)
     }
     // функция изменения названия таски
     const updateTask = (todolistId: string, taskID: string, title: string) => {
-        const newTodolistTasks = {
-            ...tasks,
-            [todolistId]: tasks[todolistId].map(t => (t.id === taskID ? { ...t, title } : t)),
-        }
-        setTasks(newTodolistTasks)
+
+        const action = changeTaskTitleAC(todolistId, taskID, title)
+        dispatchToTasks(action)
     }
     // функция переименования заголовка тудулиста
     const updateTodolist = (todolistId: string, title: string) => {
