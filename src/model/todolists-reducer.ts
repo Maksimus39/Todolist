@@ -11,6 +11,7 @@ export type AddTodolistActionType = {
     type: 'ADD-TODOLIST'
     payload: {
         title: string
+        todolistId: string
     }
 }
 export type ChangeTodolistTitleActionType = {
@@ -37,10 +38,12 @@ export const removeTodolistAC = (todolistId: string): RemoveTodolistActionType =
     } as const
 }
 export const addTodolistAC = (title: string): AddTodolistActionType => {
+    const todolistId = v1(); // Генерируем новый идентификатор
     return {
         type: 'ADD-TODOLIST',
         payload: {
-            title: title
+            title,
+            todolistId
         }
     } as const
 }
@@ -83,9 +86,8 @@ export const todolistsReducer = (state: TodolistType[] = initialState, action: A
             return state.filter(tl => tl.id !== action.payload.id) // логика по удалению тудулиста
         }
         case 'ADD-TODOLIST': {
-            const todolistId1 = v1()
             const newTodolist: TodolistType = {
-                id: todolistId1,
+                id: action.payload.todolistId,
                 title: action.payload.title,
                 filter: 'all'
             }
