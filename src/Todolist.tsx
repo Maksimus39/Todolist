@@ -5,7 +5,7 @@ import IconButton from '@mui/material/IconButton'
 import DeleteIcon from '@mui/icons-material/Delete'
 import {Buttonn} from "./Button";
 import {Box, Checkbox, List, ListItem} from "@mui/material";
-import {FilterValuesType} from "./App";
+import {FilterValuesType} from "./AppWithReducer";
 import {filterButtonsContainerSx, getListItemSx} from "./Todolist.styles";
 
 
