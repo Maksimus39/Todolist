@@ -28,12 +28,12 @@ export type TasksStateType = {
 type ThemeMode = 'dark' | 'light'
 
 
-function App() {
+export function AppWithReducer() {
     // массив тудулистов
     let todolistID1 = v1()
     let todolistID2 = v1()
 
-    let [todolist, dispatchTodolist] = useReducer(todolistsReducer, [
+    let [todolist, dispatchToTodolists ] = useReducer(todolistsReducer, [
         {id: todolistID1, title: 'What to learn', filter: 'all'},
         {id: todolistID2, title: 'What to buy', filter: 'all'},
     ])
@@ -59,7 +59,7 @@ function App() {
     // функция фильтрации тудулистов
     const changeFilter = (filter: FilterValuesType, todolistId: string) => {
         const action = changeTodolistFilterAC(filter, todolistId)
-        dispatchTodolist(action)
+        dispatchToTodolists(action)
     }
     // функция добавления тасок
     const addTask = (title: string, todolistId: string) => {
@@ -74,24 +74,24 @@ function App() {
     // функция удаления тудулиста
     const removeTodolist = (todolistId: string) => {
         const action = removeTodolistAC(todolistId)
-        dispatchTodolist(action)
+        dispatchToTodolists(action)
+        dispatchToTasks(action)
     }
     // универсальная форма добавления тудулиста
     const addTodolist = (title: string) => {
-        const todolistAction = addTodolistAC(title)
-        dispatchTodolist(todolistAction)
-        dispatchToTasks(todolistAction)
+        const action = addTodolistAC(title)
+        dispatchToTodolists(action)
+        dispatchToTasks(action)
     }
     // функция изменения названия таски
     const updateTask = (todolistId: string, taskID: string, title: string) => {
-
         const action = changeTaskTitleAC(todolistId, taskID, title)
         dispatchToTasks(action)
     }
     // функция переименования заголовка тудулиста
     const updateTodolist = (todolistId: string, title: string) => {
         const action = changeTodolistTitleAC(todolistId, title)
-        dispatchTodolist(action)
+        dispatchToTodolists(action)
     }
 
 
@@ -174,4 +174,3 @@ function App() {
     );
 }
 
-export default App;
