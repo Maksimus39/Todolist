@@ -1,5 +1,4 @@
-// ActionType
-import {TasksStateType} from "../App";
+import {TasksStateType} from "../AppWithReducer";
 import {v1} from "uuid";
 import {TasksType} from "../Todolist";
 import {AddTodolistActionType, RemoveTodolistActionType} from "./todolists-reducer";
@@ -137,6 +136,6 @@ export const tasksReducer = (state: TasksStateType = initialState, action: Actio
             return stateCopy;
         }
         default:
-            throw new Error("I don't understand this type")
+          return state
     }
 }
