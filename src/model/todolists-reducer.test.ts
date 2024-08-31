@@ -18,13 +18,6 @@ test('correct todolist should be removed', () => {
         {id: todolistId2, title: 'What to buy', filter: 'all'},
     ]
 
-    // // 2. Действие
-    // const action = {
-    //     type: 'REMOVE-TODOLIST',
-    //     payload: {
-    //         id: todolistId1,
-    //     },
-    // } as const
     const endState = todolistsReducer(startState, removeTodolistAC(todolistId1))
 
     // 3. Проверяем, что наши действия (изменения state) соответствуют ожиданию
@@ -43,12 +36,7 @@ test('correct todolist should be added', () => {
         {id: todolistId2, title: 'What to buy', filter: 'all'},
     ]
 
-    // const action = {
-    //     type: 'ADD-TODOLIST',
-    //     payload: {
-    //         title: 'New Todolist',
-    //     },
-    // } as const
+
     const newTitle = 'New Todolist'
     const endState = todolistsReducer(startState, addTodolistAC(newTitle))
 
@@ -66,13 +54,7 @@ test('correct todolist should change its name', () => {
         {id: todolistId2, title: 'What to buy', filter: 'all'},
     ]
 
-    // const action = {
-    //     type: 'CHANGE-TODOLIST-TITLE',
-    //     payload: {
-    //         id: todolistId2,
-    //         title: 'New Todolist',
-    //     },
-    // } as const
+
 
     const id = todolistId2
     const newTitle = 'New Todolist'
@@ -91,14 +73,7 @@ test('correct filter of todolist should be changed', () => {
         {id: todolistId2, title: 'What to buy', filter: 'all'},
     ]
 
-    // const action = {
-    //     type: 'CHANGE-TODOLIST-FILTER',
-    //     payload: {
-    //         id: todolistId2,
-    //         filter: 'completed',
-    //     },
-    // } as const
-    //const endState = todolistsReducer(startState, action)
+
 
     const id = todolistId2
     const filter = 'completed'
