@@ -7,8 +7,7 @@ import IconButton from "@mui/material/IconButton";
 type PropsType = {
     addItem: (title: string) => void
 }
-export const AddItemForm = (props: PropsType) => {
-
+export const AddItemForm = React.memo((props: PropsType) => {
     const [taskTitle, setTaskTitle] = useState('')
     const [error, setError] = useState<string | null>(null)
 
@@ -28,7 +27,9 @@ export const AddItemForm = (props: PropsType) => {
 
     // функция добавления таски по нажатию на энтер
     const addItemOnKeyUpHandler = (event: KeyboardEvent<HTMLInputElement>) => {
-        setError(null)
+        if (error !== null) {
+            setError(null)
+        }
         if (event.key === 'Enter') {
             addItemHandler()
         }
@@ -50,11 +51,11 @@ export const AddItemForm = (props: PropsType) => {
                     onKeyUp={addItemOnKeyUpHandler}
                 />
                 <IconButton onClick={addItemHandler} color={'primary'}>
-                    <AddBoxIcon />
+                    <AddBoxIcon/>
                 </IconButton>
             </div>
         </div>
 
     )
-};
+})
 
