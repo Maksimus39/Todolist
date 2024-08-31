@@ -8,7 +8,7 @@ type ButtonProps = {
     color: 'inherit' | 'primary' | 'secondary';
 }
 
-export const Buttonn = (props: ButtonProps) => {
+export const Buttonn = React.memo((props: ButtonProps) => {
     return (
         <Button
             variant={props.variant}
@@ -18,5 +18,5 @@ export const Buttonn = (props: ButtonProps) => {
             {props.title}
         </Button>
     );
-};
+});
 
