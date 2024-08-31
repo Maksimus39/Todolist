@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import './App.css';
 import {TasksType, Todolist} from "./Todolist";
 import {AddItemForm} from "./AddItemForm";
@@ -35,45 +35,45 @@ export function AppWithRedux() {
     const dispatch = useDispatch()
 
     // функция удаления таски
-    const removeTask = (taskID: string, todolistId: string) => {
+    const removeTask = useCallback((taskID: string, todolistId: string) => {
         const action = removeTasksAC(taskID, todolistId)
         dispatch(action)
-    }
+    }, [dispatch])
     // функция фильтрации тудулистов
-    const changeFilter = (filter: FilterValuesType, todolistId: string) => {
+    const changeFilter = useCallback((filter: FilterValuesType, todolistId: string) => {
         const action = changeTodolistFilterAC(filter, todolistId)
         dispatch(action)
-    }
+    }, [dispatch])
     // функция добавления тасок
-    const addTask = (title: string, todolistId: string) => {
+    const addTask = useCallback((title: string, todolistId: string) => {
         const action = addTaskAC(title, todolistId)
         dispatch(action)
-    }
+    }, [dispatch])
     // функция для изменения статуса галочки
-    const changeTaskStatus = (todolistId: string, taskID: string, taskStatus: boolean) => {
+    const changeTaskStatus = useCallback((todolistId: string, taskID: string, taskStatus: boolean) => {
         const action = changeTaskStatusAC(todolistId, taskID, taskStatus)
         dispatch(action)
-    }
+    }, [dispatch])
     // функция удаления тудулиста
-    const removeTodolist = (todolistId: string) => {
+    const removeTodolist = useCallback((todolistId: string) => {
         const action = removeTodolistAC(todolistId)
         dispatch(action)
-    }
+    }, [dispatch])
     // универсальная форма добавления тудулиста
-    const addTodolist = (title: string) => {
+    const addTodolist = useCallback((title: string) => {
         const action = addTodolistAC(title)
         dispatch(action)
-    }
+    }, [dispatch])
     // функция изменения названия таски
-    const updateTask = (todolistId: string, taskID: string, title: string) => {
+    const updateTask = useCallback((todolistId: string, taskID: string, title: string) => {
         const action = changeTaskTitleAC(todolistId, taskID, title)
         dispatch(action)
-    }
+    }, [dispatch])
     // функция переименования заголовка тудулиста
-    const updateTodolist = (todolistId: string, title: string) => {
+    const updateTodolist = useCallback((todolistId: string, title: string) => {
         const action = changeTodolistTitleAC(todolistId, title)
         dispatch(action)
-    }
+    }, [dispatch])
 
 
     const [themeMode, setThemeMode] = useState<ThemeMode>('light')
@@ -116,23 +116,15 @@ export function AppWithRedux() {
 
                     <Grid container spacing={4}>
                         {todolists.map(td => {
-                            const allTodolistTasks = tasks[td.id]
-                            let tasksForTodolist = allTodolistTasks
 
-                            if (td.filter === 'active') {
-                                tasksForTodolist = allTodolistTasks.filter(task => !task.isDone)
-                            }
 
-                            if (td.filter === 'completed') {
-                                tasksForTodolist = allTodolistTasks.filter(task => task.isDone)
-                            }
                             return (
                                 <Grid item xs={12} sm={6} md={4} key={td.id}>
                                     <Paper sx={{p: '0 20px 20px 20px'}}>
                                         <Todolist
                                             todolistId={td.id}
                                             title={td.title}
-                                            tasks={tasksForTodolist}
+                                            tasks={tasks[td.id]}
                                             removeTask={removeTask}
                                             changeFilter={changeFilter}
                                             addTask={addTask}
@@ -148,7 +140,6 @@ export function AppWithRedux() {
                             )
                         })}
                     </Grid>
-
                 </Container>
             </ThemeProvider>
         </div>
