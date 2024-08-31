@@ -1,12 +1,13 @@
-import React, {ChangeEvent} from "react";
+import React, {useCallback} from "react";
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
 import IconButton from '@mui/material/IconButton'
 import DeleteIcon from '@mui/icons-material/Delete'
 import {Buttonn} from "./Button";
-import {Box, Checkbox, List, ListItem} from "@mui/material";
+import {Box, List} from "@mui/material";
 import {FilterValuesType} from "./AppWithReducer";
-import {filterButtonsContainerSx, getListItemSx} from "./Todolist.styles";
+import {filterButtonsContainerSx} from "./Todolist.styles";
+import {TaskItem} from "./model/TaskItem";
 
 
 export type TasksType = {
@@ -29,24 +30,34 @@ type TodolistProps = {
     updateTodolist: (todolistId: string, title: string) => void
 }
 
-export const Todolist = (props: TodolistProps) => {
-
-    // функция для кнопок фильтрации
-    const changeFilterTasksHandler = (filter: FilterValuesType) => {
+export const Todolist = React.memo((props: TodolistProps) => {
+    const changeFilterTasksHandler = useCallback((filter: FilterValuesType) => {
         props.changeFilter(filter, props.todolistId)
-    }
-    // функция удаления тудулиста
+    }, [props.changeFilter, props.todolistId])
+
     const removeTodolistHandler = () => {
         props.removeTodolist(props.todolistId)
     }
-    // универсальная форма добавления тудулиста
-    const addTaskCallback = (title: string) => {
+
+    const addTaskCallback = useCallback((title: string) => {
         props.addTask(title, props.todolistId)
-    }
-    // функция переименования заголовка тудулиста
+    }, [props.addTask, props.todolistId])
+
     const updateTodolistHandler = (title: string) => {
         props.updateTodolist(props.todolistId, title)
     }
+
+    const allTodolistTasks = props.tasks
+    let tasksForTodolist = allTodolistTasks
+
+    if (props.filter === 'active') {
+        tasksForTodolist = allTodolistTasks.filter(task => !task.isDone)
+    }
+
+    if (props.filter === 'completed') {
+        tasksForTodolist = allTodolistTasks.filter(task => task.isDone)
+    }
+
     return (
         <div>
             <div className={'todolist-title-container'}>
@@ -60,36 +71,19 @@ export const Todolist = (props: TodolistProps) => {
             <AddItemForm addItem={addTaskCallback}/>
 
             <div>
-                {props.tasks?.length === 0 ? (
+                {tasksForTodolist?.length === 0 ? (
                     <p>Тасок нет</p>
                 ) : <List>
-                    {props.tasks?.map(task => {
-                        // функция удаления таски
-                        const removeTaskHandler = () => {
-                            props.removeTask(task.id, props.todolistId)
-                        }
-                        const changeTaskStatusHandler = (event: ChangeEvent<HTMLInputElement>) => {
-                            const newStatusValue = event.currentTarget.checked; // Используем checked вместо value
-                            props.changeTaskStatus(props.todolistId, task.id, newStatusValue);
-                        }
-                        const changeTaskTitleHandler = (title: string) => {
-                            props.updateTask(props.todolistId, task.id, title);
-                        }
-
-                        return (
-                            <ListItem key={task.id} sx={getListItemSx(task.isDone)}>
-
-                                <div>
-                                    <Checkbox checked={task.isDone} onChange={changeTaskStatusHandler}/>
-                                    <EditableSpan value={task.title} onChange={changeTaskTitleHandler}/>
-                                </div>
-
-                                <IconButton onClick={removeTaskHandler}>
-                                    <DeleteIcon/>
-                                </IconButton>
-                            </ListItem>
-                        )
-                    })}
+                    {tasksForTodolist?.map(task => (
+                        <TaskItem
+                            key={task.id}
+                            task={task}
+                            todolistId={props.todolistId}
+                            removeTask={props.removeTask}
+                            changeTaskStatus={props.changeTaskStatus}
+                            updateTask={props.updateTask}
+                        />
+                    ))}
                 </List>
                 }
             </div>
@@ -115,4 +109,4 @@ export const Todolist = (props: TodolistProps) => {
             </Box>
         </div>
     )
-}
+})
