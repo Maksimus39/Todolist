@@ -4,14 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fdfd094e-2654-48e5-86ca-f766c003a184" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Header.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/app-reducer.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/common/theme.ts" afterDir="false" />
+    <list default="true" id="fdfd094e-2654-48e5-86ca-f766c003a184" name="Changes" comment="Импорт стартовых значений">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/store.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/tasks-reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/tasks-reducer.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,23 +79,113 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1726476941323</updated>
-      <workItem from="1726476943409" duration="4406000" />
+      <workItem from="1726476943409" duration="9123000" />
     </task>
+    <task id="LOCAL-00001" summary="Декомпозиция кода">
+      <option name="closed" value="true" />
+      <created>1726481565614</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1726481565614</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Рефакторинг компонент App">
+      <option name="closed" value="true" />
+      <created>1726493080373</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1726493080373</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Новый компонент FilterTasksButtons который отвечает за фильтрацию кнопок">
+      <option name="closed" value="true" />
+      <created>1726493162263</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1726493162263</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Новый компонент Main">
+      <option name="closed" value="true" />
+      <created>1726493195229</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1726493195229</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Рефакторинг тестов и импорт AC">
+      <option name="closed" value="true" />
+      <created>1726493249705</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1726493249705</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Переброс данных, в целевую компонент">
+      <option name="closed" value="true" />
+      <created>1726493303711</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1726493303711</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Рефакторинг компонент с импортом данных и вынос кнопок">
+      <option name="closed" value="true" />
+      <created>1726493373522</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1726493373522</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Новый компонент Todolists">
+      <option name="closed" value="true" />
+      <created>1726493404962</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1726493404962</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Рефакторинг тестов и импорт AC">
+      <option name="closed" value="true" />
+      <created>1726493448601</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1726493448601</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Перенёс стартовые данные">
+      <option name="closed" value="true" />
+      <created>1726493485043</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1726493485043</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Импорт стартовых значений">
+      <option name="closed" value="true" />
+      <created>1726493524616</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1726493524616</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/app/App.tsx</url>
-          <line>90</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Декомпозиция кода" />
+    <MESSAGE value="Рефакторинг компонент App" />
+    <MESSAGE value="Новый компонент FilterTasksButtons который отвечает за фильтрацию кнопок" />
+    <MESSAGE value="Новый компонент Main" />
+    <MESSAGE value="Переброс данных, в целевую компонент" />
+    <MESSAGE value="Рефакторинг компонент с импортом данных и вынос кнопок" />
+    <MESSAGE value="Новый компонент Todolists" />
+    <MESSAGE value="Рефакторинг тестов и импорт AC" />
+    <MESSAGE value="Перенёс стартовые данные" />
+    <MESSAGE value="Импорт стартовых значений" />
+    <option name="LAST_COMMIT_MESSAGE" value="Импорт стартовых значений" />
   </component>
 </project>
