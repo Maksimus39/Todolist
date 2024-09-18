@@ -1,16 +1,16 @@
-import {useDispatch} from "react-redux";
-import {addTodolistAC} from "./model/todolists-reducer";
+import {addTodolistAC} from "../features/todolists/model/reducers/todolists-reducer";
 import CssBaseline from "@mui/material/CssBaseline";
 import AppBar from "@mui/material/AppBar";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Unstable_Grid2";
 import React from "react";
-import {AddItemForm} from "./AddItemForm";
-import {Todolists} from "./Todolists";
+import {AddItemForm} from "../common/components/AddItemForm";
+import {Todolists} from "../features/todolists/ui/Todolists/Todolists";
+import {useAppDispatch} from "../common/hooks/useAppDispatch";
 
 export const Main = () => {
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const addTodolist = (title: string) => {
         dispatch(addTodolistAC(title))
