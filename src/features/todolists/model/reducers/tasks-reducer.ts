@@ -1,6 +1,6 @@
 import {v1} from "uuid";
 import {AddTodolistActionType, RemoveTodolistActionType} from "./todolists-reducer";
-import {ChangeThemeActionType} from "../app/app-reducer";
+import {ChangeThemeActionType} from "../../../../app/app-reducer";
 
 export type TaskType = {
 	id: string
