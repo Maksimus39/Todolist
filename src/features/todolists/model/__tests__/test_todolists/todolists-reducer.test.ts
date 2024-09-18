@@ -4,7 +4,7 @@ import {
 	changeTodolistTitleAC,
 	removeTodolistAC,
 	todolistsReducer, TodolistType
-} from './todolists-reducer'
+} from '../../reducers/todolists-reducer'
 import {v1} from 'uuid'
 
 
