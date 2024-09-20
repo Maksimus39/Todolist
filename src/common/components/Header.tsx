@@ -9,10 +9,11 @@ import React from "react";
 import {MenuButton} from "./MenuButton";
 import {useAppDispatch} from "../hooks/useAppDispatch";
 import {useAppSelector} from "../hooks/useAppSelector";
+import {selectThemeMode} from "../../app/appSelectors";
 
 
 export const Header = () => {
-    const themeMode = useAppSelector(state => state.app.themeMode)
+    const themeMode = useAppSelector(selectThemeMode)
 
     const dispatch = useAppDispatch()
 
