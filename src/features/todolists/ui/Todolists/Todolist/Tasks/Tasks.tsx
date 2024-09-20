@@ -1,14 +1,15 @@
 import {TodolistType} from "../../../../model/reducers/todolists-reducer";
-import {Task} from "../../../../../../Task";
+import {Task} from "./Task/Task";
 import {List} from "@mui/material";
 import {useAppSelector} from "../../../../../../common/hooks/useAppSelector";
+import {selectTasksSelector} from "../../../../model/tasksSelectors";
 
 type Props = {
     todolist: TodolistType
 }
 
 export const Tasks = ({ todolist }: Props) => {
-    const tasks = useAppSelector(state => state.tasks)
+    const tasks = useAppSelector(selectTasksSelector)
 
     const allTodolistTasks = tasks[todolist.id]
 
