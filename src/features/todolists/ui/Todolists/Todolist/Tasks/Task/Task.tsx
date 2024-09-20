@@ -1,12 +1,12 @@
-import {changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, TaskType} from "./features/todolists/model/reducers/tasks-reducer";
+import {changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, TaskType} from "../../../../../model/reducers/tasks-reducer";
 import {ChangeEvent} from "react";
 import {useDispatch} from "react-redux";
-import {TodolistType} from "./features/todolists/model/reducers/todolists-reducer";
+import {TodolistType} from "../../../../../model/reducers/todolists-reducer";
 import {Checkbox, ListItem} from "@mui/material";
-import {EditableSpan} from "./common/components/EditableSpan";
+import {EditableSpan} from "../../../../../../../common/components/EditableSpan";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
-import {getListItemSx} from "./Task.styles";
+import {getListItemSx} from "../../../../../../../Task.styles";
 
 type Props = {
     task: TaskType
