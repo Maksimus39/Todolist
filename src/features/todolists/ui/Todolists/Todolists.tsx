@@ -3,10 +3,11 @@ import React from "react";
 import Paper from "@mui/material/Paper";
 import {Todolist} from "./Todolist/Todolist";
 import {useAppSelector} from "../../../../common/hooks/useAppSelector";
+import {selectTodolistsSelector} from "../../model/todolistsSelectors";
 
 export const Todolists = () => {
 
-    const todolists = useAppSelector((state) => state.todolists)
+    const todolists = useAppSelector(selectTodolistsSelector)
 
 
     return (
