@@ -5,17 +5,18 @@ import {Header} from "../common/components/Header";
 import {Main} from "./Main";
 import {ThemeProvider} from "@mui/material";
 import {useAppSelector} from "../common/hooks/useAppSelector";
+import {selectThemeMode} from "./appSelectors";
 
 
 function App() {
 
-    const themeMode = useAppSelector(state => state.app.themeMode)
+    const themeMode = useAppSelector(selectThemeMode)
 
     return (
         <ThemeProvider theme={getTheme(themeMode)}>
             <CssBaseline/>
-                <Header/>
-                <Main/>
+            <Header/>
+            <Main/>
         </ThemeProvider>
     );
 }
