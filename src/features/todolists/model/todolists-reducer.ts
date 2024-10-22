@@ -1,6 +1,7 @@
 import { Todolist } from "../api/todolistsApi.types"
 import { Dispatch } from "redux"
 import { todolistsApi } from "../api/todolistsApi"
+import { setAppStatusAC } from "../../../app/app-reducer"
 
 export type FilterValuesType = "all" | "active" | "completed"
 
@@ -60,11 +61,16 @@ export const changeTodolistFilterAC = (payload: { id: string; filter: FilterValu
   return { type: "CHANGE-TODOLIST-FILTER", payload } as const
 }
 
+export const setTodolistsAC = (todolists: Todolist[]) => {
+  return { type: "SET-TODOLISTS", todolists } as const
+}
+
 // Actions types
 export type RemoveTodolistActionType = ReturnType<typeof removeTodolistAC>
 export type AddTodolistActionType = ReturnType<typeof addTodolistAC>
 export type ChangeTodolistTitleActionType = ReturnType<typeof changeTodolistTitleAC>
 export type ChangeTodolistFilterActionType = ReturnType<typeof changeTodolistFilterAC>
+export type SetTodolistsActionType = ReturnType<typeof setTodolistsAC>
 
 type ActionsType =
   | RemoveTodolistActionType
@@ -75,26 +81,26 @@ type ActionsType =
 
 // --------------------------------------------------------------------- thunk() ---------------------------------------------
 
-export const setTodolistsAC = (todolists: Todolist[]) => {
-  return { type: "SET-TODOLISTS", todolists } as const
-}
-
-export type SetTodolistsActionType = ReturnType<typeof setTodolistsAC>
-
 export const fetchTodolistsTC = () => (dispatch: Dispatch) => {
+  dispatch(setAppStatusAC("loading"))
   todolistsApi.getTodolists().then((res) => {
+    dispatch(setAppStatusAC("succeeded"))
     dispatch(setTodolistsAC(res.data))
   })
 }
 
 export const addTodolistTC = (title: string) => (dispatch: Dispatch) => {
+  dispatch(setAppStatusAC("loading"))
   todolistsApi.createTodolist(title).then((res) => {
+    dispatch(setAppStatusAC("succeeded"))
     dispatch(addTodolistAC(res.data.data.item))
   })
 }
 
 export const removeTodolistTC = (id: string) => (dispatch: Dispatch) => {
+  dispatch(setAppStatusAC("loading"))
   todolistsApi.deleteTodolist(id).then((res) => {
+    dispatch(setAppStatusAC("succeeded"))
     dispatch(removeTodolistAC(id))
   })
 }

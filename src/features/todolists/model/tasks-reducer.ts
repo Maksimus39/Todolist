@@ -4,6 +4,7 @@ import { Dispatch } from "redux"
 import { DomainTask, UpdateTaskModel } from "../api/tasksApi.types"
 import { TaskStatus } from "common/enums"
 import { RootState } from "../../../app/store"
+import { setAppStatusAC } from "../../../app/app-reducer"
 
 export type TasksStateType = {
   [key: string]: DomainTask[]
@@ -120,7 +121,9 @@ type ActionsType =
 // --------------------------------------------------------------------------------- thunk() --------------------------------
 
 export const fetchTasksTC = (todolistId: string) => (dispatch: Dispatch) => {
+  dispatch(setAppStatusAC("loading"))
   tasksApi.getTasks(todolistId).then((res) => {
+    dispatch(setAppStatusAC("succeeded"))
     const tasks = res.data.items
     dispatch(setTasksAC({ todolistId, tasks }))
   })
@@ -133,8 +136,9 @@ export const removeTaskTC = (arg: { taskId: string; todolistId: string }) => (di
 }
 
 export const addTaskTC = (arg: { title: string; todolistId: string }) => (dispatch: Dispatch) => {
+  dispatch(setAppStatusAC("loading"))
   tasksApi.createTask(arg).then((res) => {
-    // самостоятельно
+    dispatch(setAppStatusAC("succeeded"))
     dispatch(addTaskAC({ task: res.data.data.item }))
   })
 }

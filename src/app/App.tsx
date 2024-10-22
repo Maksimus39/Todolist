@@ -7,6 +7,7 @@ import { getTheme } from "common/theme"
 import { selectThemeMode } from "./appSelectors"
 import { Main } from "./Main"
 import { fetchTodolistsTC } from "../features/todolists/model/todolists-reducer"
+import { ErrorSnackbar } from "common/components/ErrorSnackbar/ErrorSnackbar"
 
 export const App = () => {
   const themeMode = useAppSelector(selectThemeMode)
@@ -14,13 +15,14 @@ export const App = () => {
 
   useEffect(() => {
     dispatch(fetchTodolistsTC())
-  }, [])
+  }, [dispatch])
 
   return (
     <ThemeProvider theme={getTheme(themeMode)}>
       <CssBaseline />
       <Header />
       <Main />
+      <ErrorSnackbar />
     </ThemeProvider>
   )
 }

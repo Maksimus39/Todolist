@@ -9,6 +9,8 @@ import { selectThemeMode } from "../../../app/appSelectors"
 import { useAppDispatch, useAppSelector } from "common/hooks"
 import { getTheme } from "common/theme"
 import { MenuButton } from "common/components"
+import { LinearProgress } from "@mui/material"
+import { selectAppStatus } from "../../../app/selectAppStatus"
 
 export const Header = () => {
   const dispatch = useAppDispatch()
@@ -16,6 +18,8 @@ export const Header = () => {
   const themeMode = useAppSelector(selectThemeMode)
 
   const theme = getTheme(themeMode)
+
+  const status = useAppSelector(selectAppStatus)
 
   const changeModeHandler = () => {
     dispatch(changeThemeAC(themeMode === "light" ? "dark" : "light"))
@@ -34,6 +38,7 @@ export const Header = () => {
           <Switch color={"default"} onChange={changeModeHandler} />
         </div>
       </Toolbar>
+      {status === "loading" && <LinearProgress color="secondary" />}
     </AppBar>
   )
 }
